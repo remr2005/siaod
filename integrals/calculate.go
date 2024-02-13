@@ -23,7 +23,7 @@ func Sred(a []float64) float64 {
 		res2 += i
 		len += 1
 	}
-	return math.Sqrt((res1 - res2) / len)
+	return math.Sqrt(res1/len - (res2*res2)/(len*len))
 }
 
 func Simpson(inFunc func(float64) float64, a, b, n_min, n_max, e float64) (float64, float64, error) {
@@ -62,7 +62,7 @@ func MonteKarlo(inFunc func(x float64) float64, a, b, n float64, iter int) (floa
 			res += inFunc(u)
 			u = rand.Float64()*math.Abs(a-b) + a
 		}
-		arr = append(arr, res*(b-a))
+		arr = append(arr, (res*(b-a))/n)
 		res = 0
 	}
 	return arr[0], Sred(arr)

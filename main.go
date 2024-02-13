@@ -11,4 +11,6 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(res, pog)
+	res, pog = integrals.MonteKarlo(integrals.F1, 0, 1.6, 100000, 10)
+	fmt.Println(res, pog)
 }
