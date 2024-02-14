@@ -25,6 +25,21 @@ func Two2one(arr [][]float64) (res []float64) {
 	return res
 }
 
+func ProdRow(a []float64, b []float64) []float64 {
+	res := make([]float64, len(a))
+	for i := 0; i < len(a); i++ {
+		res[i] = a[i] * b[i]
+	}
+	return res
+}
+
+func Sum(a []float64) (res float64) {
+	for _, i := range a {
+		res += i
+	}
+	return res
+}
+
 // слайс в матрицу гонам
 func Array_to_matrix(arr [][]float64) mat.Dense {
 	return *mat.NewDense(len(arr), len(arr[0]), Two2one(arr))
@@ -32,13 +47,14 @@ func Array_to_matrix(arr [][]float64) mat.Dense {
 
 // минусовать строки слайса
 func SubRows(a, b []float64) (res []float64) {
-	var nul int = -1
+	var nul int
 	for n, i := range a {
-		if i == 0 {
+		if i != 0 {
 			nul = n
+			break
 		}
 	}
-	k := b[nul+1] / a[nul+1]
+	k := b[nul] / a[nul]
 	res = b
 	for i := 0; i < len(a); i++ {
 		res[i] -= a[i] * k
@@ -82,22 +98,21 @@ func Gaus(a [][]float64, b []float64) ([]float64, error) {
 		return []float64{}, err
 	}
 	arr = To_triangular(arr)
-	fmt.Println(1)
-	for o, i := range arr {
+	arr_b := make([][]float64, 0)
+	for _, i := range arr {
 		var n int
-		fmt.Println(2)
 		for j := 0; j < len(i)-1; j++ {
 			if i[j] != 0 {
 				n = j
 				break
 			}
 		}
-		fmt.Println(3)
-		vect := Scale(i[n], i)
-		fmt.Println(4)
-		x[len(x)-1-o] = FindX(vect, x)
+		arr_b = append(arr_b, Scale(1/i[n], i))
 	}
-	return []float64{}, nil
+	for i := len(a[0]) - 2; i >= 0; i-- {
+		x[i] = FindX(arr_b[i], x)
+	}
+	return x, nil
 }
 
 // объединение матриц коофициентов и матрицы свободных членов
@@ -132,6 +147,5 @@ func FindX(a []float64, b []float64) float64 {
 	for i := eins + 1; i < len(a)-1; i++ {
 		x -= a[i] * b[i]
 	}
-	fmt.Println("x", x)
 	return x
 }
