@@ -64,8 +64,74 @@ func To_triangular(arr [][]float64) [][]float64 {
 	return arr
 }
 
+// вывести двумерный массив
 func Print_Arr(a [][]float64) {
 	for _, i := range a {
 		fmt.Println(i)
 	}
+}
+
+// решение по гаусу
+func Gaus(a [][]float64, b []float64) ([]float64, error) {
+	x := make([]float64, len(a[0]))
+	for i := 0; i < len(x); i++ {
+		x[i] = 1
+	}
+	arr, err := Conect(a, b)
+	if err != nil {
+		return []float64{}, err
+	}
+	arr = To_triangular(arr)
+	fmt.Println(1)
+	for o, i := range arr {
+		var n int
+		fmt.Println(2)
+		for j := 0; j < len(i)-1; j++ {
+			if i[j] != 0 {
+				n = j
+				break
+			}
+		}
+		fmt.Println(3)
+		vect := Scale(i[n], i)
+		fmt.Println(4)
+		x[len(x)-1-o] = FindX(vect, x)
+	}
+	return []float64{}, nil
+}
+
+// объединение матриц коофициентов и матрицы свободных членов
+func Conect(a [][]float64, b []float64) ([][]float64, error) {
+	if len(a) != len(b) {
+		return [][]float64{}, fmt.Errorf("размер матрицы коофициентов не соответствует размеру матрицы свободных членов")
+	}
+	res := a
+	for n, i := range b {
+		res[n] = append(res[n], i)
+	}
+	return res, nil
+}
+
+func Scale(a float64, b []float64) (res []float64) {
+	res = b
+	for n, i := range b {
+		res[n] = a * i
+	}
+	return res
+}
+
+func FindX(a []float64, b []float64) float64 {
+	var eins int = -1
+	for n, i := range a {
+		if i == 1 {
+			eins = n
+			break
+		}
+	}
+	x := a[len(a)-1]
+	for i := eins + 1; i < len(a)-1; i++ {
+		x -= a[i] * b[i]
+	}
+	fmt.Println("x", x)
+	return x
 }
