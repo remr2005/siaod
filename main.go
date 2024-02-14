@@ -32,12 +32,19 @@ func main() {
 	fmt.Println(res, pog)
 
 	// a := make([][]float64, 0)
-	// a = append(a, []float64{1, 2, 3, 4})
-	// a = append(a, []float64{3, 2, 4, 0})
-	// a = append(a, []float64{0, 2, 1, 6})
+	// a = append(a, []float64{5, 0, 1})
+	// a = append(a, []float64{1, 3, -1})
+	// a = append(a, []float64{-3, 2, 10})
+	// b := make([]float64, 0)
+	// b = append(b, 11)
+	// b = append(b, 4)
+	// b = append(b, 6)
 	// slau.Print_Arr(a)
-	// fmt.Println()
-	// slau.Print_Arr(slau.To_triangular(a))
+	// i, err := slau.Gaus(a, b)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println(i)
 }
 
 // Вывод
