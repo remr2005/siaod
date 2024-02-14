@@ -41,8 +41,8 @@ func Sum(a []float64) (res float64) {
 }
 
 // слайс в матрицу гонам
-func Array_to_matrix(arr [][]float64) mat.Dense {
-	return *mat.NewDense(len(arr), len(arr[0]), Two2one(arr))
+func Array_to_matrix(arr [][]float64) *mat.Dense {
+	return mat.NewDense(len(arr), len(arr[0]), Two2one(arr))
 }
 
 // минусовать строки слайса
