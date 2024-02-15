@@ -1,7 +1,13 @@
 package main
 
+import (
+	"fmt"
+	"siaodMath/integrals"
+)
+
 func main() {
 
+	// Лаба 1
 	// res, pog, err := integrals.Simpson(integrals.F1, 0, 1.6, 10, 1000, 0.0001)
 	// if err != nil {
 	// 	panic(err)
@@ -26,6 +32,8 @@ func main() {
 	// res, pog = integrals.AdaptSimpson(integrals.F1, 0, 1.6, 10, 0.0001)
 	// fmt.Println(res, pog)
 
+	fmt.Println(integrals.MonteKarloImage2())
+	// Лаба 2
 	// a := make([][]float64, 0)
 	// a = append(a, []float64{2, 0, -1})
 	// a = append(a, []float64{-1, 3, -1})
@@ -41,6 +49,9 @@ func main() {
 	// }
 	// fmt.Println(vect)
 	// fmt.Println(slau.Two2one(a))
+
+	// Лаба 3
+
 }
 
 // Вывод

@@ -1,6 +1,6 @@
 package slau
 
-import "gonum.org/v1/gonum/mat"
+import _ "gonum.org/v1/gonum/mat"
 
 // Как писать код?
 // сделать бранч
@@ -44,6 +44,7 @@ func DownTriangle(a [][]float64) [][]float64 {
 	return a
 }
 
+/*
 func GausZeidel(a [][]float64, b []float64) {
 	x := make([]float64, 0)
 	for i := 0; i < len(b); i++ {
@@ -65,3 +66,4 @@ func GausZeidel(a [][]float64, b []float64) {
 	B := mat.NewDense(1, len(b), b)
 
 }
+*/
