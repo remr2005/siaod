@@ -1,6 +1,8 @@
 package slau
 
-import _ "gonum.org/v1/gonum/mat"
+import (
+	_ "gonum.org/v1/gonum/mat"
+)
 
 // Как писать код?
 // сделать бранч
@@ -45,7 +47,7 @@ func DownTriangle(a [][]float64) [][]float64 {
 }
 
 /*
-func GausZeidel(a [][]float64, b []float64) {
+func GausZeidel(a [][]float64, b []float64, e float64) {
 	x := make([]float64, 0)
 	for i := 0; i < len(b); i++ {
 		x = append(x, 1)
@@ -67,3 +69,39 @@ func GausZeidel(a [][]float64, b []float64) {
 
 }
 */
+
+func GausZeidel(a [][]float64, b []float64, e float64) []float64 {
+	x := make([]float64, 0)
+	for i := 0; i < len(b); i++ {
+		x = append(x, 1.1)
+	}
+	x_ := make([]float64, len(x))
+	copy(x_, x)
+
+	var calc_c = func(i, j int) float64 {
+		if i == j {
+			return 0
+		} else {
+			return -a[i][j] / a[i][i]
+		}
+	}
+	var calc_d = func(i int) float64 { return b[i] / a[i][i] }
+	var sub_vect = func(a, b []float64) (res float64) {
+		for i := 0; i < len(a); i++ {
+			res += a[i] - b[i]
+		}
+		return res
+	}
+	for sub_vect(x, x_) <= e {
+		copy(x_, x)
+		for i := 0; i < len(a); i++ {
+			d := calc_d(i)
+			var res float64
+			for j := 0; j < len(a[0]); j++ {
+				res += calc_c(i, j) * x[j]
+			}
+			x[i] = res + d
+		}
+	}
+	return x
+}
