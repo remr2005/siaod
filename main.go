@@ -3,38 +3,12 @@ package main
 import (
 	"fmt"
 	"siaodMath/slau"
-
-	"gonum.org/v1/gonum/mat"
 )
 
 func main() {
-	// Лаба 2
-	a := [][]float64{{5, 0, 1}, {1, 3, -1}, {-3, 2, 10}}
-	b := []float64{11, 4, 6}
-	aCopy := make([][]float64, len(a))
-	copy(aCopy, a)
-	bCopy := make([]float64, len(b))
-	copy(bCopy, b)
-	bCopyCopy := make([]float64, len(b))
-	copy(bCopyCopy, b)
-
-	A := mat.NewDense(3, 3, slau.Two2one(a))
-	arr, err := slau.Gaus(a, b)
-	if err != nil {
-		panic(err)
-	}
-	arr_ := slau.GausZeidel(aCopy, bCopy, 0.0001)
-	X := mat.NewDense(3, 1, arr)
-	B := mat.NewDense(3, 1, nil)
-	B_ := mat.NewDense(3, 1, nil)
-	X_ := mat.NewDense(3, 1, arr_)
-	B_.Product(A, X_)
-	B.Product(A, X)
-	fmt.Println(B.RawMatrix().Data, b)
-	fmt.Println(B.RawMatrix().Data, "-", bCopyCopy, "-", B_.RawMatrix().Data)
-
+	fmt.Println(slau.Gaus([][]float64{{5, 0, 1}, {1, 3, -1}, {-3, 2, 10}}, []float64{11, 4, 6}))
 	// Лаба 3
-
+	//fmt.Println("Ньютона -", snau.Newton(func(f float64) float64 { return math.Cos(f) - f*f*f }, 0, 0.001))
 }
 
 // Вывод

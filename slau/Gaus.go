@@ -89,10 +89,12 @@ func Print_Arr(a [][]float64) {
 
 // решение по гаусу
 func Gaus(a [][]float64, b []float64) ([]float64, error) {
+	//  начальное приближение(оно здесь по сути ненужно так что)
 	x := make([]float64, len(a[0]))
 	for i := 0; i < len(x); i++ {
 		x[i] = 1
 	}
+	//
 	arr, err := Conect(a, b)
 	if err != nil {
 		return []float64{}, err
