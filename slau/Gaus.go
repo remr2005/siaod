@@ -14,6 +14,16 @@ func Rep_r(a, b int, arr [][]float64) [][]float64 {
 	return arr
 }
 
+func MinArray(a []float64) float64 {
+	min := 0.0
+	for _, i := range a {
+		if min < i {
+			min = i
+		}
+	}
+	return min
+}
+
 // делает одномерный массив из двумерного
 func Two2one(arr [][]float64) (res []float64) {
 	res = make([]float64, 0)
@@ -29,6 +39,14 @@ func ProdRow(a []float64, b []float64) []float64 {
 	res := make([]float64, len(a))
 	for i := 0; i < len(a); i++ {
 		res[i] = a[i] * b[i]
+	}
+	return res
+}
+
+func AddRow(a []float64, b []float64) []float64 {
+	res := make([]float64, len(a))
+	for i := 0; i < len(a); i++ {
+		res[i] = a[i] + b[i]
 	}
 	return res
 }
@@ -130,7 +148,9 @@ func Conect(a [][]float64, b []float64) ([][]float64, error) {
 }
 
 func Scale(a float64, b []float64) (res []float64) {
-	res = b
+	res = make([]float64, len(b))
+	copy(res, b)
+
 	for n, i := range b {
 		res[n] = a * i
 	}
