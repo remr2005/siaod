@@ -61,3 +61,39 @@ func Splain(f func(float64) float64, x []float64) {
 	fmt.Println("c:", arr_c)
 	fmt.Println("d:", arr_d)
 }
+
+func Splain(f func(float64) float64, x []float64) []float64 {
+	n := len(x) - 1
+	a := make([]float64, 0)
+	b := make([]float64, 0)
+	c := make([]float64, 0)
+	d := make([]float64, 0)
+	m := make([]float64, n+1)
+	fmt.Println(n)
+	h := make([]float64, n+1)
+	y := make([]float64, n+1)
+	y[n] = f(x[n])
+	fmt.Println(1)
+	for i := 0; i < n; i++ {
+		y[i] = f(x[i])
+		h[i] = x[i+1] - x[i]
+	}
+	fmt.Println(1, len(y), len(x))
+	for i := 1; i <= n-1; i++ {
+		a = append(a, (h[i]+h[i+1])/3)
+		d = append(d, (y[i+1]-y[i])/h[i+1]-(y[i]-y[i-1])/h[i])
+		b = append(b, h[i+1]/6)
+		c = append(c, h[i]/6)
+	}
+	fmt.Println(1, len(c), len(b), len(a), len(d))
+	l := make([]float64, 1)
+	mu := make([]float64, 1)
+	for i := 1; i <= n; i++ {
+		m[i+1] = (d[i]*(-c[i])*mu[i-1] - (a[i]+c[i]*l[i-1])*m[i]) / b[i]
+		mu = append(mu, (d[i]-c[i]*mu[i-1])/(a[i]+c[i]*l[i-1]))
+		l = append(l, (-b[i])/(a[i]+c[i]*l[i-1]))
+	}
+	fmt.Println(1)
+	return m
+}
+
