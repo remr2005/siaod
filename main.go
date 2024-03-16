@@ -17,11 +17,11 @@ func main() {
 	fmt.Println("Сплайн", interpolation.Splain([]float64{1.00, 1.05, 1.09, 1.13, 1.15, 1.17, 1.2}, y, []float64{1.05, 1.09, 1.13, 1.15, 1.17}))
 	fmt.Println("Эрмит", interpolation.Hermit(math.Exp, []float64{1.00, 1.05, 1.09, 1.13, 1.15, 1.17, 1.2}, []float64{1.05, 1.09, 1.13, 1.15, 1.17}))
 	// Lab 5
-	fmt.Println(interpolation.FurieSet(f, 100, []float64{0, math.Pi / 2, math.Pi}))
-	fmt.Println(interpolation.Furie2(f, -2*math.Pi, 2*math.Pi, 1000, []float64{0, math.Pi / 2, math.Pi}))
-	fmt.Println(f(0))
+	fmt.Println("Результат интерполяции", interpolation.Furie(f_, 2*math.Pi, 10, []float64{-math.Pi / 2, 0, math.Pi / 2, math.Pi}))
+	fmt.Println("Результат оригинальной функции", []float64{f_(-math.Pi / 2), f_(0), f_(math.Pi / 2), f_(math.Pi)})
+	fmt.Println("Абсолютная ошибка", interpolation.ComputeMAE([]float64{f_(-math.Pi / 2), f_(0), f_(math.Pi / 2), f_(math.Pi)}, interpolation.Furie(f_, 2*math.Pi, 10, []float64{-math.Pi / 2, 0, math.Pi / 2, math.Pi})))
 }
 
-func f(x float64) float64 {
+func f_(x float64) float64 {
 	return (2 / math.Pi) * math.Asin(math.Sin(x))
 }
