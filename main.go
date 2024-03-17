@@ -20,6 +20,9 @@ func main() {
 	fmt.Println("Результат интерполяции", interpolation.Furie(f_, 2*math.Pi, 10, []float64{-math.Pi / 2, 0, math.Pi / 2, math.Pi}))
 	fmt.Println("Результат оригинальной функции", []float64{f_(-math.Pi / 2), f_(0), f_(math.Pi / 2), f_(math.Pi)})
 	fmt.Println("Абсолютная ошибка", interpolation.ComputeMAE([]float64{f_(-math.Pi / 2), f_(0), f_(math.Pi / 2), f_(math.Pi)}, interpolation.Furie(f_, 2*math.Pi, 10, []float64{-math.Pi / 2, 0, math.Pi / 2, math.Pi})))
+	fmt.Println("Быстрое преобразование Фурье")
+	fmt.Println("Исходная информация", []complex128{0, 1, 2, 3, 4, 5, 6, 7})
+	fmt.Println("Результат", interpolation.FFT([]complex128{0, 1, 2, 3, 4, 5, 6, 7}))
 }
 
 func f_(x float64) float64 {
